@@ -11,7 +11,9 @@ export class Glitter {
         this.defaultSetting = new DefaultSetting({
             pageBgColor: "white",
             pageAnimation: this.animation.none,
-            dialogAnimation: this.animation.none
+            dialogAnimation: this.animation.none,
+            pageLoading: () => { },
+            pageLoadingFinish: () => { }
         });
         this.htmlGenerate = HtmlGenerate;
         this.webUrl = '';
@@ -409,14 +411,23 @@ export class Glitter {
         }
         return value;
     }
-    setPro(tag, data, callBack, option) {
+    setPro(tag, data = "", callBack, option = {
+        webFunction: (data, callback) => {
+            Glitter.glitter.setCookie(tag, data.data.data);
+            callback({ result: true });
+        }
+    }) {
         this.runJsInterFace("setPro", {
             uuid: this.uuid,
             name: tag,
             data: data,
         }, callBack, option);
     }
-    getPro(tag, callBack, option) {
+    getPro(tag, callBack, option = {
+        webFunction: (data, callback) => {
+            callback({ result: true, data: Glitter.glitter.getCookieByName(tag) });
+        }
+    }) {
         this.runJsInterFace("getPro", {
             uuid: this.uuid,
             name: tag
@@ -620,6 +631,9 @@ export class Glitter {
                             index++;
                             addScript();
                         }
+                        else {
+                            alert(script.readyState);
+                        }
                     };
                 }
                 else {
@@ -630,18 +644,23 @@ export class Glitter {
                         }
                     };
                 }
+                script.addEventListener('error', () => {
+                    error("");
+                });
                 if (scritem.type === 'text/babel') {
                     glitter.$('body').append(`<script type="text/babel" src="${scritem.src}"></script>`);
                 }
                 else if (scritem.type !== undefined) {
                     script.setAttribute('type', scritem.type);
                     script.setAttribute('src', (_b = scritem.src) !== null && _b !== void 0 ? _b : undefined);
+                    script.setAttribute('crossorigin', true);
                     script.setAttribute('id', (_c = scritem.id) !== null && _c !== void 0 ? _c : undefined);
                     document.getElementsByTagName("head")[0].appendChild(script);
                 }
                 else {
                     script.setAttribute('src', (_d = scritem.src) !== null && _d !== void 0 ? _d : scritem);
                     script.setAttribute('id', (_e = scritem.id) !== null && _e !== void 0 ? _e : undefined);
+                    script.setAttribute('crossorigin', true);
                     document.getElementsByTagName("head")[0].appendChild(script);
                 }
             }

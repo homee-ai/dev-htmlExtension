@@ -6,14 +6,15 @@
   "scripts": {
     "start:tscAutob": "tsc --project tsconfig.json && tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "node node_modules/@jianzhi.wang/glitter/create.js",
+    "create": "ts-node -r ts-glitter/create.js",
     "publish": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./src & node publish.js"
   },
   "dependencies": {
+    "ts-glitter": "^1.3.0",
     "@types/jquery": "^3.5.14",
     "child_process": "^1.0.2",
+    "moment": "^2.29.4",
     "ts-node": "^10.9.1",
-    "@jianzhi.wang/glitter": "^1.0.83",
     "tscpaths": "^0.0.9",
     "typescript": "~4.4.4"
   },

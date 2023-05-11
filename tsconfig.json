@@ -2,11 +2,7 @@
     "compilerOptions": {
         "incremental": true,
         "target": "ES2017",
-<<<<<<< HEAD
-        "module": "ES2020",
-=======
-        "module": "es2020",
->>>>>>> ad5c0cf (1675133953128)
+       "module": "es2020",
         "declaration": false,
         "sourceMap": false,
         "outDir": "./src",

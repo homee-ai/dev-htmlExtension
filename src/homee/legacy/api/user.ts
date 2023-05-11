@@ -1,0 +1,34 @@
+import {Glitter} from "../glitterBundle/Glitter.js"
+export class User {
+    public static getUserData(next: () => void){
+        const glitter=Glitter.glitter
+        glitter.runJsInterFace("getUserData", {}, function (response) {
+            glitter.share.userData = response.data
+            next()
+        }, {
+            webFunction(data: {}, callback: (data: any) => void): any {
+                $.ajax({
+                    url: `${glitter.share.apiURL}/api/v1/user/login`,
+                    type: 'post',
+                    data: JSON.stringify({email: 'sam94074@gmail.com', pwd: `sam12345`}),
+                    contentType: 'application/json; charset=utf-8',
+                    success: (suss: any) => {
+                        callback({
+                            data: {
+                                user_id: 12052350,
+                                last_name: "Rdtest",
+                                first_name: "Rdtes22t",
+                                name: "Rdtest Rd",
+                                photo: "https://prd-homee-api-public.s3.amazonaws.com/scene/12577227/headPhoto.png",
+                                AUTH: suss.token
+                            },
+                            beta:true
+                        })
+                    },
+                    error: (err: any) => {
+                    },
+                });
+            }
+        })
+    }
+}

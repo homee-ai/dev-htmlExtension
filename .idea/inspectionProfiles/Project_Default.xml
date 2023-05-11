@@ -3,5 +3,16 @@
     <option name="myName" value="Project Default" />
     <inspection_tool class="HoconIncludeResolution" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="HoconRequiredIncludeResolution" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="2">
+            <item index="0" class="java.lang.String" itemvalue="35px" />
+            <item index="1" class="java.lang.String" itemvalue="24px" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
   </profile>
 </component>

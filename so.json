@@ -1,0 +1,17 @@
+{
+  "HASH_IV": "PR2OsEORBYThOPsC",
+  "HASH_KEY": "tYv2d0404KNWRuDBU71B1LDwJqWa0Eur",
+  "ActionURL": "https://core.newebpay.com/MPG/mpg_gateway",
+  "NotifyURL": "https://homeestaging.com/api/bm/checkout/notify",
+  "ReturnURL": "https://homeestaging.com/api/bm/checkout/redirect",
+  "MERCHANT_ID": "MS3370421534"
+}
+
+{
+  "HASH_IV": "Cqbk7hj6K4csKMhP",
+  "HASH_KEY": "k6gKk4aEqttJfezgOJZlVNNBHhZW6In3",
+  "ActionURL": "https://ccore.newebpay.com/MPG/mpg_gateway",
+  "NotifyURL":"https://homeestaging.com/api/bm/checkout/notify",
+  "ReturnURL": "https://homeestaging.com/api/bm/checkout/redirect",
+  "MERCHANT_ID": "MS148232865"
+}

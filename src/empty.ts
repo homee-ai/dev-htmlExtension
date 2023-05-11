@@ -1,117 +1,56 @@
-(() => {
-    const glitter = (window as any).glitter
-    //每個元件的屬性
-    interface HtmlJson {
-        rout: string,
-        type: string,
-        id: string,
-        label: string,
-        data: any,
-        js: string,
-        refreshAll: () => void,
-        refreshComponent: () => void
-    }
+'use strict';
+import {Plugin} from './glitterBundle/plugins/plugin-creater.js'
+import {Api} from "./homee/api/homee-api.js";
 
-    const obj: { [name: string]: { defaultData: any, render: (gvc: any, widget: HtmlJson, setting: HtmlJson[], hoverID: string[]) => void } }
-        =
-        {
-            title:{
-                defaultData:{
-                    //對widget.data做初值設定 如下對font做設定
-                    font:"16"
+Plugin.create(import.meta.url,(glitter)=>{
+    const api={
+        upload:(photoFile:any,callback:(link:string)=>void)=>{
+            glitter.share.dialog.dataLoading({text:'上傳中',visible:true})
+            $.ajax({
+                url: Api.serverURL+'/api/v1/scene/getSignedUrl',
+                type: 'post',
+                data: JSON.stringify({ file_name:`${new Date().getTime()}`}),
+                contentType: 'application/json; charset=utf-8',
+                headers: { Authorization: glitter.getCookieByName('token') },
+                success: (data1: { url: string; fullUrl: string }) => {
+                    $.ajax({
+                        url: data1.url,
+                        type: 'put',
+                        data: photoFile,
+                        processData: false,
+                        crossDomain: true,
+                        success: (data2: any) => {
+                            glitter.share.dialog.dataLoading({visible:false})
+                            glitter.share.dialog.successMessage({text:"上傳成功"})
+                            callback(data1.fullUrl)
+                        },
+                        error: (err: any) => {
+                            glitter.share.dialog.successMessage({text:"上傳失敗"})
+                        },
+                    });
                 },
-                render:(gvc: any, widget: HtmlJson, setting: HtmlJson[])=>{
-                    return {
-                        //分為二 view決定中間該顯示的樣子
-                        //editor決定右方供人輸入的樣子
-                        view:`<h3 style="color: ${widget.data.color ?? "black"};font-size: ${widget.data.font ?? ""}px;"
-                        onclick="${gvc.event(()=>{
-                            glitter.addMtScript(['http://127.0.0.1:3090/test/TEST.js'],()=>{
-                                glitter.share.apiModel.showAlert()
-                            },()=>{})
-                        })}">${widget.data.title}</h3>`,
-                        editor:gvc.map([
-                            glitter.htmlGenerate.editeInput({
-                                gvc: gvc,
-                                title: "標題",
-                                default: widget.data.title,
-                                placeHolder: "請帶入標題",
-                                callback: (text: string) => {
-                                    widget.data.title= text
-                                    widget.refreshAll!()
-                                }
-                            }),
-                            `
-<h3 style="color: white;font-size: 16px;margin-bottom: 10px;" class="mt-2">字型大小</h3>
-<input class="form-control" placeholder="" onchange="${gvc.event((e:any)=>{
-                                widget.data.font=e.value
-                                widget.refreshAll!()
-                            })}" value="${widget.data.font ?? ""}">
-                            `,
-                            (()=>{
-                                const option=['red','black','yellow','blue']
-                                return `<h3 style="color: white;font-size: 16px;margin-bottom: 10px;" class="mt-2">字型顏色</h3>
-                            <select class="form-control" onchange="${gvc.event((e:any)=>{
-                                    widget.data.color=e.value
-                                    widget.refreshAll!()
-                                })}">
-                            ${gvc.map(option.map((dd)=>{
-                                return `<option value="${dd}" ${(dd === widget.data.color) ? `selected`:``}>${dd}</option>`
-                                }))}
-</select>`
-                            })()
-                        ])
+                error: (err: any) => {
+                    glitter.share.dialog.successMessage({text:"上傳失敗"})
+                },
+            });
+        }
+    }
+    return {
+        banner: {
+            defaultData:{
+                link:[]
+            },
+            render:(gvc, widget, setting, hoverID) => {
+                const data: { link: { img: string,code?:string }[] } = widget.data
+
+                return {
+                    view: ()=>{return ``},
+                    editor: ()=>{
+                        return ``
                     }
                 }
             },
-            banner: {
-                defaultData: {},
-                render: (gvc: any, widget: HtmlJson, setting: HtmlJson[]) => {
-                    const a = ['1', '2', '3']
-                    return {
-                        view: `
-                    <img src="${widget.data.link}" class="${widget.data.class ?? ""}">
-                    `,
-                        editor: gvc.map([
-                            glitter.htmlGenerate.editeInput({
-                                gvc: gvc,
-                                title: "連結",
-                                default: widget.data.link,
-                                placeHolder: "請帶入連結",
-                                callback: (text: string) => {
-                                    widget.data.link = text
-                                    widget.refreshAll!()
-                                }
-                            }),
-                            glitter.htmlGenerate.editeInput({
-                                gvc: gvc,
-                                title: "Class",
-                                default: widget.data.class,
-                                placeHolder: "請帶入Class",
-                                callback: (text: string) => {
-                                    widget.data.class = text
-                                    widget.refreshAll!()
-                                }
-                            }),
-                            glitter.htmlGenerate.editeInput({
-                                gvc: gvc,
-                                title: "Style",
-                                default: widget.data.class,
-                                placeHolder: "請帶入Class",
-                                callback: (text: string) => {
-                                    widget.data.class = text
-                                    widget.refreshAll!()
-                                }
-                            })
-                        ])
-                    }
-                },
-            },
-        }
-    //這裡決定在插件的函式路徑名稱 檔名則影響測試區 正式區呼叫的路徑
-    glitter.share.htmlExtension["empty"] = obj
-    glitter.share.htmlExtension["empty"].document = {
-        title: "empty",
-        doc: {}
+        },
+
     }
-})()
+});
