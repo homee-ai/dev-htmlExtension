@@ -400,7 +400,7 @@ Plugin.create(import.meta.url, (glitter) => {
                                         })}"> 
                                             <div class="d-flex" style="padding: 8px 22px;">
                                                 <img src="${data.vendor_icon}" style="width: 24px;height: 24px;border-radius: 50%;margin-right: 8px;">
-                                                <div class="vendor_name">${data.vendor_name}</div>
+                                                <div class="vendor_name" style="">${data.vendor_name}</div>
                                                 <div class="vendor_context ms-auto" onclick="${gvc.event(() => {
                                                     clock.zeroing()
                                                     data.selectBack=()=>{
@@ -408,7 +408,7 @@ Plugin.create(import.meta.url, (glitter) => {
                                                         gvc.glitter.goBack("shopping_cart")
                                                     }
                                                     appConfig().changePage(gvc,'user_couponDetail',data)
-                                    }           )}">${data.vendor_context}</div>
+                                    })}">${data.vendor_context}</div>
                                             </div>
                                             <div class="w-100" style="background: #E0E0E0;height: 1px;"></div>
                                             <div class="" style="padding: 8px 22px;">

@@ -894,13 +894,13 @@ ${glitter.htmlGenerate.editeInput({
                                             </div>
                                             <div class="w-100" style="background: #E0E0E0;height: 1px;"></div>
                                             <div class="" style="padding: 8px 22px;">
-                                                <div  style="font-weight: 700;font-size: 16px;line-height: 23px;">${coupon.name}</div>
-                                                <div class="d-flex align-items-center" style="margin-top:4px;font-weight: 700;  font-size: 24px;line-height: 35px;color: #FE5541;">${coupon.discount}</div>
+                                                <div  style="font-weight: 700;font-size: 16px;line-height: 23px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${coupon.name}</div>
+                                                <div  style="margin-top:4px;font-weight: 700;font-size: 24px;line-height: 35px;color: #FE5541;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${coupon.discount}</div>
                                                 <div class="d-flex align-items-center" style="margin-top: 4px;">
                                                     <div class="" style="font-weight: 400;font-size: 12px;line-height: 17px;color: #858585;">${coupon.lowCostText}</div>
-                                                    <div style="font-weight: 700;font-size: 12px;line-height: 150%;color: #1E1E1E;">${coupon.lowCostNumber}</div>
+                                                    <div style="font-weight: 700;font-size: 12px;line-height: 150%;color: #1E1E1E;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;padding-right: 5%">${coupon.lowCostNumber}</div>
                                                     <div class="ms-auto d-flex">
-                                                        <div class="${coupon.dateType}dateText" style="font-weight: 400;font-size: 12px;line-height: 17px;color: #858585;">${coupon.dateText}</div>
+                                                        <div class="${coupon.dateType}dateText" style="font-weight: 400;font-size: 12px;line-height: 17px;color: #858585;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 50%">${coupon.dateText}</div>
                                                         <div class="${coupon.dateType}date" style="font-weight: 700;font-size: 12px;line-height: 150%;color: #1E1E1E;">${coupon.date}</div>
                                                     </div>                                                        
                                                 </div>

@@ -211,8 +211,6 @@ export class Checkout {
                         success: (res) => {
                             callback(res.voucherList.map((dd) => {
                                 const c = dd.config.config;
-                                console.log("------------------------------------------");
-                                console.log(dd);
                                 return {
                                     id: dd.id,
                                     note: dd.config.note,
@@ -227,6 +225,7 @@ export class Checkout {
                                     icon: 'img/coupon1.svg',
                                     title: (() => {
                                         let text = '';
+                                        console.log(dd);
                                         switch (c.howToPlay) {
                                             case 'discount':
                                                 switch (c.accord_rule) {
@@ -257,7 +256,7 @@ export class Checkout {
                                                                 break;
                                                             case 'percent':
                                                                 function transToChinese(value) {
-                                                                    let ten = value / 10;
+                                                                    let ten = Math.floor(value / 10);
                                                                     let digit = value % 10;
                                                                     function convertToChineseNumber(number) {
                                                                         var chineseNumber;
@@ -458,130 +457,55 @@ export class Checkout {
                                                 }
                                                 break;
                                             case 'giveaway':
-                                                switch (c.accord_rule) {
-                                                    case "least": {
-                                                        switch (c.accord) {
-                                                            case "consum": {
-                                                                dd.config.name += `消費滿 NT$ ${c.accord_number}`;
-                                                                break;
-                                                            }
-                                                            case "product": {
-                                                                dd.config.name += `消費滿 ${c.accord_number} 件`;
-                                                                break;
-                                                            }
+                                                switch (c.giveaway_select) {
+                                                    case 'categories':
+                                                        if (c.give_categories.length > 1) {
+                                                            let temp = "";
+                                                            c.give_categories.map((category, index) => {
+                                                                if (index > 0) {
+                                                                    temp += "、";
+                                                                }
+                                                                let name = category.name;
+                                                                name = name.replace("=== ", "");
+                                                                name = name.replace(" ===", "");
+                                                                temp += name;
+                                                            });
+                                                            text += `即贈 ${temp} 任選 1 個`;
                                                         }
-                                                        switch (c.giveaway_select) {
-                                                            case 'categories':
-                                                                if (c.give_categories.length > 1) {
-                                                                    let temp = "";
-                                                                    c.give_categories.map((category, index) => {
-                                                                        if (index > 0) {
-                                                                            temp += "、";
-                                                                        }
-                                                                        let name = category.name;
-                                                                        name = name.replace("=== ", "");
-                                                                        name = name.replace(" ===", "");
-                                                                        temp += name;
-                                                                    });
-                                                                    text += `即贈 ${temp} 任選 1 個`;
-                                                                }
-                                                                else {
-                                                                    let temp = c.give_categories[0].name;
-                                                                    temp = temp.replace("=== ", "");
-                                                                    temp = temp.replace(" ===", "");
-                                                                    text += `即贈 ${temp} 任選 1 個`;
-                                                                }
-                                                                break;
-                                                            case 'products':
-                                                                if (c.give_products.length > 1) {
-                                                                    let temp = "";
-                                                                    c.give_products.map((category, index) => {
-                                                                        if (index > 0) {
-                                                                            temp += "、";
-                                                                        }
-                                                                        let name = category.name;
-                                                                        name = name.replace("=== ", "");
-                                                                        name = name.replace(" ===", "");
-                                                                        temp += name;
-                                                                    });
-                                                                    text += `即贈 ${temp}  1 個`;
-                                                                }
-                                                                else {
-                                                                    let temp = c.give_products[0].name;
-                                                                    temp = temp.replace("=== ", "");
-                                                                    temp = temp.replace(" ===", "");
-                                                                    text += `即贈 ${temp}  1 個`;
-                                                                }
-                                                                break;
+                                                        else {
+                                                            let temp = c.give_categories[0].name;
+                                                            temp = temp.replace("=== ", "");
+                                                            temp = temp.replace(" ===", "");
+                                                            text += `即贈 ${temp} 任選 1 個`;
                                                         }
                                                         break;
-                                                    }
-                                                    case "every": {
-                                                        switch (c.accord) {
-                                                            case "consum": {
-                                                                dd.config.name += `消費每滿 NT$ ${c.accord_number}`;
-                                                                break;
-                                                            }
-                                                            case "product": {
-                                                                dd.config.name += `消費每滿 ${c.accord_number} 件`;
-                                                                break;
-                                                            }
+                                                    case 'products':
+                                                        if (c.give_products.length > 1) {
+                                                            let temp = "";
+                                                            c.give_products.map((category, index) => {
+                                                                if (index > 0) {
+                                                                    temp += "、";
+                                                                }
+                                                                let name = category.name;
+                                                                name = name.replace("=== ", "");
+                                                                name = name.replace(" ===", "");
+                                                                temp += name;
+                                                            });
+                                                            text += `即贈 ${temp}  1 個`;
                                                         }
-                                                        switch (c.giveaway_select) {
-                                                            case 'categories':
-                                                                if (c.give_categories.length > 1) {
-                                                                    let temp = "";
-                                                                    c.give_categories.map((category, index) => {
-                                                                        if (index > 0) {
-                                                                            temp += "、";
-                                                                        }
-                                                                        let name = category.name;
-                                                                        name = name.replace("=== ", "");
-                                                                        name = name.replace(" ===", "");
-                                                                        temp += name;
-                                                                    });
-                                                                    text += `即贈 ${temp} 任選 1 個`;
-                                                                }
-                                                                else {
-                                                                    let temp = c.give_categories[0].name;
-                                                                    temp = temp.replace("=== ", "");
-                                                                    temp = temp.replace(" ===", "");
-                                                                    text += `即贈 ${temp} 任選 1 個`;
-                                                                }
-                                                                break;
-                                                            case 'products':
-                                                                if (c.give_products.length > 1) {
-                                                                    let temp = "";
-                                                                    c.give_products.map((category, index) => {
-                                                                        if (index > 0) {
-                                                                            temp += "、";
-                                                                        }
-                                                                        let name = category.name;
-                                                                        name = name.replace("=== ", "");
-                                                                        name = name.replace(" ===", "");
-                                                                        temp += name;
-                                                                    });
-                                                                    text += `即贈 ${temp}  1 個`;
-                                                                }
-                                                                else {
-                                                                    let temp = c.give_products[0].name;
-                                                                    temp = temp.replace("=== ", "");
-                                                                    temp = temp.replace(" ===", "");
-                                                                    text += `即贈 ${temp}  1 個`;
-                                                                }
-                                                                break;
+                                                        else {
+                                                            let temp = c.give_products[0].name;
+                                                            temp = temp.replace("=== ", "");
+                                                            temp = temp.replace(" ===", "");
+                                                            text += `即贈 ${temp}  1 個`;
                                                         }
                                                         break;
-                                                    }
                                                 }
                                                 break;
                                         }
                                         return text;
                                     })(),
                                     subTitle: (() => {
-                                        if (c.howToPlay === 'rebate') {
-                                            return ``;
-                                        }
                                         let text = '';
                                         return dd.config.name;
                                     })(),

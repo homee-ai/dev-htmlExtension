@@ -535,15 +535,15 @@ src="${(!widget.data.logo.src || widget.data.logo.src === '') ? new URL('./src/h
                             rightIcon: `
                        <div class="d-flex align-items-center" style="gap:15px;">
                        
-                       <img src="${rootURL}/img/component/scan.svg" onclick="${gvc.event(() => {
+                       <img src="${rootURL}img/component/scan.svg" onclick="${gvc.event(() => {
                                 glitter.runJsInterFace("qrcodeScanner", {}, () => {
                                 })
                             })}">
-                       <img src="${rootURL}/homee/src/bell.svg" onclick="${gvc.event(() => {
+                       <img src="${rootURL}/img/component/bell.svg" onclick="${gvc.event(() => {
                                 glitter.runJsInterFace("noticeBell", {}, () => {
                                 })
                             })}">
-                       <img src="${rootURL}/homee/src/category.svg" onclick="${gvc.event(() => {
+                       <img src="${rootURL}img/component/category.svg" onclick="${gvc.event(() => {
                                 appConfig().changePage(gvc, 'category')
                             })}">
                        

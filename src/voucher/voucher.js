@@ -392,7 +392,7 @@ Plugin.create(import.meta.url, (glitter) => {
                                         })}"> 
                                             <div class="d-flex" style="padding: 8px 22px;">
                                                 <img src="${data.vendor_icon}" style="width: 24px;height: 24px;border-radius: 50%;margin-right: 8px;">
-                                                <div class="vendor_name">${data.vendor_name}</div>
+                                                <div class="vendor_name" style="">${data.vendor_name}</div>
                                                 <div class="vendor_context ms-auto" onclick="${gvc.event(() => {
                                             clock.zeroing();
                                             data.selectBack = () => {
