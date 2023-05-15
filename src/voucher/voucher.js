@@ -345,8 +345,8 @@ Plugin.create(import.meta.url, (glitter) => {
                                     vendor_context: "優惠券內容",
                                     name: dd.subTitle,
                                     discount: dd.title,
-                                    lowCostText: "",
-                                    lowCostNumber: "",
+                                    lowCostText: dd.lowCostText,
+                                    lowCostNumber: dd.lowCostNumber,
                                     dateText: "有效期限：",
                                     date: dd.formatEndTime,
                                     dateType: "",
@@ -376,6 +376,8 @@ Plugin.create(import.meta.url, (glitter) => {
                                     }
                                     let clock = gvc.glitter.ut.clock();
                                     return gvc.map(widget.data.voucherCardList.map((data) => {
+                                        console.log("------------------------------");
+                                        console.log(data);
                                         return `
                                         <div class="voucherCard overflow-hidden" onclick="${gvc.event(() => {
                                             var _a, _b;

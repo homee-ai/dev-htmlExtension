@@ -350,9 +350,9 @@ Plugin.create(import.meta.url, (glitter) => {
                                     name: dd.subTitle,
                                     discount: dd.title,
                                     //最低消費：->後續要加
-                                    lowCostText: "",
+                                    lowCostText: dd.lowCostText,
                                     //NT$ 30,000->後續要加
-                                    lowCostNumber: "",
+                                    lowCostNumber: dd.lowCostNumber,
                                     dateText: "有效期限：",
                                     date: dd.formatEndTime,
                                     dateType: "",
@@ -384,7 +384,8 @@ Plugin.create(import.meta.url, (glitter) => {
                                     }
                                     let clock:any=gvc.glitter.ut.clock()
                                     return gvc.map(widget.data.voucherCardList.map((data: any) => {
-
+                                        console.log("------------------------------")
+                                        console.log(data)
                                         return `
                                         <div class="voucherCard overflow-hidden" onclick="${gvc.event(() => {
                                             if(clock.stop()<1000){
