@@ -1279,7 +1279,7 @@ color: #1E1E1E;">${data.title}</div>
                                 return `
                                 ${shareView.navigationBar({
                                     title: "分類",
-                                    leftIcon:`<img class="" src="${new URL!(`../img/sample/idea/left-arrow.svg`, import.meta.url)}" style="width: 24px;height: 24px;margin-right: 16px" alt="" onclick="${gvc.event(() => {
+                                    leftIcon:`<img class="" src="https://homee-ai.github.io/glitter-htmlExtension/src/img/sample/idea/left-arrow.svg" style="width: 24px;height: 24px;margin-right: 16px" alt="" onclick="${gvc.event(() => {
                                         if( gvc.glitter.pageConfig.length <= 1){
                                             appConfig().setHome(gvc, "home", {})
                                         }else{

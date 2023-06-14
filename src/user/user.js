@@ -450,22 +450,6 @@ Plugin.create(import.meta.url, (glitter) => {
                         ]
                     }
                 ],
-                lastSection: {
-                    contactUs: {
-                        title: "聯絡我們",
-                        servicePhoneTitle: "客服專線",
-                        servicePhone: "0972-636-236",
-                        serviceTimeTitle: "服務時間",
-                        physicalStore: "週一 ~ 週五 10:00-18:00",
-                        onlineStore: "週一 ~ 週日 09:00-18:00",
-                        service1v1: {
-                            title: "線上專人服務",
-                            onclick: () => {
-                            }
-                        }
-                    },
-                    kanban: "img/kanban.png"
-                }
             },
             render: (gvc, widget, setting, hoverID) => {
                 const data = widget.data;
@@ -552,74 +536,7 @@ Plugin.create(import.meta.url, (glitter) => {
                                 return returnHTML;
                             }, divCreate: { style: `margin-top: 26px;font-family: 'Noto Sans TC';font-style: normal;`, class: `` }
                         })}
-                        ${gvc.bindView({
-                            bind: "lastSection",
-                            view: () => {
-                                let styleClass = {
-                                    lastSectionTitle: `
-                                        font-weight: 700;
-                                        font-size: 24px;
-                                        line-height: 35px;                                    
-                                        color: #292929;                                    
-                                        margin-bottom : 24px;
-                                    `,
-                                    serviceTimeBlock: `
-                                        font-weight: 400;
-                                        font-size: 15px;
-                                        line-height: 150%;
-                                        color: #858585;
-                                    `,
-                                    servicePhoneBlock: `
-                                        font-weight: 400;
-                                        font-size: 15px;
-                                        line-height: 150%;
-                                        color: #858585;
-                                    `,
-                                    serviceBTN: `
-                                        height: 48px;
-                                        margin-top:24px;                  
-                                        font-weight: 700;
-                                        font-size: 18px;
-                                        line-height: 26px;                                        
-                                        text-align: center;
-                                        letter-spacing: 0.15em;            
-                                        background: #FD6A58;
-                                        border-radius: 28px;                                                                                
-                                        color: #FFFFFF;
-                                    `
-                                };
-                                let thisModel = widget.data.lastSection;
-                                return `
                         
-                                <div class="d-flex justify-content-center align-items-center" style="${styleClass.lastSectionTitle}">${thisModel.contactUs.title}</div>
-                                <div class=" d-flex flex-column align-items-start justify-content-start" style="${styleClass.servicePhoneBlock} margin-bottom: 16px;">
-                                    <div>客服專線：0972-636-236</div>
-                                    
-                                </div>
-                                <div class="" style="${styleClass.serviceTimeBlock} ">
-                                    <div>${thisModel.contactUs.serviceTimeTitle} : ${thisModel.contactUs.physicalStore}</div>                                    
-                                    <div>${thisModel.contactUs.onlineStore}</div>
-                                </div>
-                                <button class="w-100  border-0" style="${styleClass.serviceBTN}" onclick="${gvc.event(() => {
-                                    thisModel.contactUs.service1v1.onclick();
-                                })}">${thisModel.contactUs.service1v1.title}</button>
-                                
-                                ${gvc.bindView({
-                                    bind: "kanban",
-                                    view: () => {
-                                        return `
-                                            <div class="" style="position: absolute;bottom: 0;left:0;transform: translate(0 , 100%);padding-top: 57%;width : 100%;background:50% / cover url(${new URL(`../img/component/kanban.png`, import.meta.url)})"></div>
-                                        `;
-                                    },
-                                    divCreate: { class: ``, style: `width : 100%;` }
-                                })}     
-                            `;
-                            },
-                            divCreate: {
-                                class: ``,
-                                style: `background: #FBF9F6;border-radius: 24px;padding: 16px 32px 24px;margin-bottom:200px;position: relative;`
-                            }
-                        })}
                         `;
                     },
                     editor: () => {
@@ -677,6 +594,123 @@ ${glitter.htmlGenerate.editeInput({
                                 widget.refreshAll();
                             })}">添加區塊</div>`
                         ]));
+                    }
+                };
+            },
+        },
+        contactInf: {
+            defaultData: {
+                lastSection: {
+                    contactUs: {
+                        title: "聯絡我們",
+                        servicePhoneTitle: "客服專線",
+                        servicePhone: "0972-636-236",
+                        serviceTimeTitle: "服務時間",
+                        physicalStore: "週一 ~ 週五 10:00-18:00",
+                        onlineStore: "週一 ~ 週日 09:00-18:00",
+                        service1v1: {
+                            title: "線上專人服務",
+                            onclick: () => {
+                            }
+                        }
+                    },
+                    kanban: "img/kanban.png"
+                }
+            },
+            render: (gvc, widget, setting, hoverID) => {
+                const data = widget.data;
+                return {
+                    view: () => {
+                        let id = glitter.getUUID();
+                        return `${gvc.bindView({
+                            bind: id,
+                            view: () => {
+                                var _a, _b;
+                                let styleClass = {
+                                    lastSectionTitle: `
+                                        font-weight: 700;
+                                        font-size: 24px;
+                                        line-height: 35px;                                    
+                                        color: #292929;                                    
+                                        margin-bottom : 24px;
+                                    `,
+                                    serviceTimeBlock: `
+                                        font-weight: 400;
+                                        font-size: 15px;
+                                        line-height: 150%;
+                                        color: #858585;
+                                    `,
+                                    servicePhoneBlock: `
+                                        font-weight: 400;
+                                        font-size: 15px;
+                                        line-height: 150%;
+                                        color: #858585;
+                                    `,
+                                    serviceBTN: `
+                                        height: 48px;
+                                        margin-top:24px;                  
+                                        font-weight: 700;
+                                        font-size: 18px;
+                                        line-height: 26px;                                        
+                                        text-align: center;
+                                        letter-spacing: 0.15em;            
+                                        background: #FD6A58;
+                                        border-radius: 28px;                                                                                
+                                        color: #FFFFFF;
+                                    `
+                                };
+                                widget.data.title = (_a = widget.data.title) !== null && _a !== void 0 ? _a : "聯絡我們";
+                                widget.data.content = (_b = widget.data.content) !== null && _b !== void 0 ? _b : ``;
+                                let thisModel = widget.data.lastSection;
+                                let temp = `
+                                    <div class=" d-flex flex-column align-items-start justify-content-start" style="${styleClass.servicePhoneBlock} margin-bottom: 16px;">
+                                    <div>客服專線：0972-636-236</div>
+                                    
+                                </div>
+                                    <div class="" style="${styleClass.serviceTimeBlock} ">
+                                        <div>${thisModel.contactUs.serviceTimeTitle} : ${thisModel.contactUs.physicalStore}</div>                                    
+                                        <div>${thisModel.contactUs.onlineStore}</div>
+                                    </div>
+                                `;
+                                return `
+                                <div class="" style="background: #FBF9F6;border-radius: 20px;padding:16px 32px 24px;">
+                                    <div class="d-flex justify-content-center align-items-center" style="${styleClass.lastSectionTitle}">${thisModel.contactUs.title}</div>
+                                    <pre class="d-flex flex-column align-items-baseline " style="color: #858585;font-family: 'Noto Sans TC';font-style: normal;font-weight: 400;font-size: 15px;line-height: 150%;">${widget.data.content}</pre>
+                                    <button class="w-100  border-0" style="${styleClass.serviceBTN}" onclick="${gvc.event(() => {
+                                    thisModel.contactUs.service1v1.onclick();
+                                })}">${thisModel.contactUs.service1v1.title}</button>
+                                    
+                                    ${gvc.bindView({
+                                    bind: "kanban",
+                                    view: () => {
+                                        return `
+                                                <div class="" style="position: absolute;bottom: 0;left:0;transform: translate(0 , 100%);padding-top: 57%;width : 100%;background:50% / cover url(${new URL(`../img/component/kanban.png`, import.meta.url)})"></div>
+                                            `;
+                                    },
+                                    divCreate: { class: ``, style: `width : 100%;` }
+                                })}     
+                                </div>
+                                
+                            `;
+                            },
+                            divCreate: {
+                                class: ``,
+                                style: `background: white;padding: 0 27px;margin-bottom:200px;position: relative;`
+                            }
+                        })}`;
+                    },
+                    editor: () => {
+                        let data = widget.data.lastSection;
+                        return gvc.map([glitter.htmlGenerate.editeText({
+                                gvc: gvc,
+                                title: "中間文字",
+                                default: widget.data.content,
+                                placeHolder: `請輸入文字的html內容`,
+                                callback: (text) => {
+                                    widget.data.content = text;
+                                    widget.refreshAll();
+                                }
+                            })]);
                     }
                 };
             },
@@ -1923,7 +1957,7 @@ ${glitter.htmlGenerate.editeInput({
                                     `
                                 };
                                 return `
-                                <bottom style="margin-bottom: 30px;${classAdd.footerBTN}${classAdd.shareBTN}" class="w-100 d-flex align-items-center justify-content-center" onclick="${gvc.event(() => {
+                                <bottom style="padding-bottom: 30px;${classAdd.footerBTN}${classAdd.shareBTN}" class="w-100 d-flex align-items-center justify-content-center" onclick="${gvc.event(() => {
                                     glitter.runJsInterFace("shareText", {
                                         text: `趕快下載HOMEE APP:https://apps.apple.com/tw/app/homee-marketplace/id6444941721，註冊並輸入我的邀請碼:${widget.data.inviteCode}，立刻獲得200折 $ 100 優惠券`
                                     }, () => {

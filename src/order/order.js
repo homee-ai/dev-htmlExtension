@@ -250,7 +250,6 @@ Plugin.create(import.meta.url, (glitter, editMode) => {
                 const viewModel = new ViewModel(gvc);
                 const data = (_a = gvc.parameter.pageConfig) === null || _a === void 0 ? void 0 : _a.obj.data;
                 const origin = data.orderData.origin;
-                console.log(JSON.stringify(data));
                 return {
                     view: () => {
                         var _a;

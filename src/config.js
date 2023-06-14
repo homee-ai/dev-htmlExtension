@@ -8,7 +8,6 @@ export function appConfig() {
         uploadImage: (photoFile, callback) => {
             const glitter = window.glitter;
             const dialog = new Dialog();
-            console.log(photoFile);
             dialog.dataLoading(true);
             $.ajax({
                 url: Api.serverURL + '/api/v1/scene/getSignedUrl',

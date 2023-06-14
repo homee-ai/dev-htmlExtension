@@ -315,7 +315,6 @@ Plugin.create(import.meta.url, (glitter, editMode) => {
                 const dialog = new Dialog(gvc);
                 let rebat = 0;
                 Checkout.getRebat((response:any)=>{
-                    console.log(response.data[0].credit_balance);
                     rebat = response.data[0].credit_balance;
                 });
                 dialog.dataLoading(true)
@@ -489,6 +488,7 @@ Plugin.create(import.meta.url, (glitter, editMode) => {
 
                 return {
                     view: () => {
+
                         return `
                         <div style="">
                         ${gvc.bindView({
@@ -620,18 +620,17 @@ Plugin.create(import.meta.url, (glitter, editMode) => {
                                                                                 })
                                                                             }
                                                                         })}">
-                                                                    ${(() => {
-                                                                    if (item.kind && item.kind != "Default Title") {
-                                                                   
-                                                                        return `
-                                                                        <div class="item-kind" onclick="${gvc.event(() => {
-                                                                            
-                                                                        })}">${item.kind}</div>
-                                                                        <img style="width:16px;height:16px;margin-left: 8px;" src="${new URL('../img/component/shoppingCart/downArrow.svg', import.meta.url)}">
-                                                                                        `
-                                                                    }
-                                                                    return ``
-                                                                })()}                                                                        
+                                                                            ${(() => {
+                                                                            if (item.kind && item.kind != "Default Title") {
+                                                                                return `
+                                                                                <div class="item-kind" onclick="${gvc.event(() => {
+                                                                                    
+                                                                                })}">${item.kind}</div>
+                                                                                <img style="width:16px;height:16px;margin-left: 8px;" src="${new URL('../img/component/shoppingCart/downArrow.svg', import.meta.url)}">
+                                                                                                `
+                                                                            }
+                                                                            return ``
+                                                                        })()}                                                                        
                                                                         </div>
                                                                         <div class="d-flex " style="margin-top: 13px;">
                                                                             <div class="d-flex" style="">

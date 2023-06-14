@@ -663,102 +663,90 @@ Plugin.create(import.meta.url, (glitter) => {
                             view: () => {
                                 if (widget.data.topInset !== undefined && widget.data.loginData.account !== undefined) {
                                     return `
-                                        <main style="overflow-x: hidden;">
+                                        <main style="overflow-x: hidden;position: relative">
+                                            <img src="https://homee-ai.github.io/glitter-htmlExtension/src/img/component/left-arrow.svg" alt="L" style="width: 28px;height: 28px;position: absolute;top:${widget.data.topInset + 20}px;left:16px;z-index: 3;" onclick="${gvc.event(() => {
+                                        appConfig().setHome(gvc, "login");
+                                    })}">
                                             <div class="w-100" style="position: absolute;">
                                                 <lottie-player src="${new URL('../img/component/login/login_page.json', import.meta.url)}"  background="#F8F3ED"  speed="1"  onclick="${gvc.event((e) => {
-                                        glitter.goBack();
                                     })}" style="width: 100%;height: 1073px;position: absolute;transform: translateY(-40%);"  loop  autoplay></lottie-player>
                                             </div>
                                             <div class="loginBoard d-flex flex-column align-items-center">
                                                 <img src="${new URL('../img/component/login/logo.svg', import.meta.url)}" alt="LOGO">
-                                                <div class="loginInf d-flex flex-column align-items-center">
-                                                    <div class="userPic" style="border-radius: 50%;background: whitesmoke url('${new URL('../img/component/login/userPic.png', import.meta.url)}') no-repeat 50% 50%;background-size: contain" onclick="${gvc.event((e) => {
-                                        glitter.ut.chooseMediaCallback({
-                                            single: true,
-                                            accept: "image/*",
-                                            callback(data) {
-                                                if (data.length > 0) {
-                                                    glitter.$(e).css('background', `50%/cover no-repeat url('${data[0].data}')`);
-                                                }
-                                            }
-                                        });
-                                    })}">
-                                                    </div>                        
-                                                <!--四個註冊元素 每個都必填-->
-                                                
-                                                <div class="d-flex flex-wrap w-100" style="padding-left: 47px;padding-right: 47px;">                                                    
-                                                    <div class="d-flex w-100 w-100 me-0">
-                                                        <div class="registerElement d-flex elementMargin w-100 me-0">                                                           
-                                                            <img src="${new URL('../img/component/login/message.svg', import.meta.url)}">
-                                                            <input class="w-100" placeholder="電子郵件地址或手機號碼" name="email" onchange="${gvc.event((e) => {
+                                                <div class="loginInf d-flex flex-column align-items-center">                                                                                                   
+                                                    <div class="d-flex flex-wrap w-100" style="padding-left: 47px;padding-right: 47px;">                                                    
+                                                        <div class="d-flex w-100 w-100 me-0">
+                                                            <div class="registerElement d-flex elementMargin w-100 me-0">                                                           
+                                                                <img src="${new URL('../img/component/login/message.svg', import.meta.url)}">
+                                                                <input class="w-100" placeholder="電子郵件地址或手機號碼" name="email" onchange="${gvc.event((e) => {
                                         widget.data.loginData.email = e.value;
                                     })}">                                                           
-                                                        </div>                       
-                                                    </div>
-                                                    <div class="d-flex w-100 w-100 me-0">
-                                                        <div class="registerElement d-flex elementMargin w-100 me-0">                                                           
-                                                            <img src="${new URL('../img/component/login/password.svg', import.meta.url)}">
-                                                            <input class="w-100" placeholder="密碼" name="password" type="password" onchange="${gvc.event((e) => {
+                                                            </div>                       
+                                                        </div>
+                                                        <div class="d-flex w-100 w-100 me-0">
+                                                            <div class="registerElement d-flex elementMargin w-100 me-0">                                                           
+                                                                <img src="${new URL('../img/component/login/password.svg', import.meta.url)}">
+                                                                <input class="w-100" placeholder="密碼" name="password" type="password" onchange="${gvc.event((e) => {
                                         widget.data.loginData.password = e.value;
                                     })}">                                                           
-                                                        </div>                       
-                                                    </div>
-                                                    <div class="d-flex w-100">
-                                                        <div class="registerElement d-flex elementMargin">                                                           
-                                                            <img src="${new URL('../img/component/login/L.svg', import.meta.url)}">
-                                                            <input class="" placeholder="姓氏" name="last" onchange="${gvc.event((e) => {
+                                                            </div>                       
+                                                        </div>
+                                                        <div class="d-flex w-100">
+                                                            <div class="registerElement d-flex elementMargin">                                                           
+                                                                <img src="${new URL('../img/component/login/L.svg', import.meta.url)}">
+                                                                <input class="" placeholder="姓氏" name="last" onchange="${gvc.event((e) => {
                                         widget.data.loginData.firstName = e.value;
                                     })}">                                                           
-                                                        </div>
-                                                        <div class="registerElement d-flex  elementMargin">
-                                                            <img src="${new URL('../img/component/login/F.svg', import.meta.url)}">
-                                                            <input class="" placeholder="名稱" name="name" value="" onchange="${gvc.event((e) => {
+                                                            </div>
+                                                            <div class="registerElement d-flex  elementMargin">
+                                                                <img src="${new URL('../img/component/login/F.svg', import.meta.url)}">
+                                                                <input class="" placeholder="名稱" name="name" value="" onchange="${gvc.event((e) => {
                                         widget.data.loginData.lastName = e.value;
                                     })}">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="d-flex w-100 w-100 me-0">
-                                                        <div class="registerElement d-flex elementMargin w-100 me-0">                                                           
-                                                            <img src="${new URL('../img/component/login/addUser.svg', import.meta.url)}">
-                                                            <input class="w-100" placeholder="用戶名稱" name="name" onchange="${gvc.event((e) => {
+                                                        <div class="d-flex w-100 w-100 me-0">
+                                                            <div class="registerElement d-flex elementMargin w-100 me-0">                                                           
+                                                                <img src="${new URL('../img/component/login/addUser.svg', import.meta.url)}">
+                                                                <input class="w-100" placeholder="用戶名稱" name="name" onchange="${gvc.event((e) => {
                                         widget.data.loginData.name = e.value;
                                     })}">                                                           
-                                                        </div>                       
-                                                    </div>
-                                                    <div class="d-flex w-100">
-                                                        <div class="registerElement d-flex elementMargin">
-                                                            <img src="${new URL('../img/component/login/profile.svg', import.meta.url)}">
-                                                            <select name="gender" style="background: none;color: black;" onchange="${gvc.event((e) => {
+                                                            </div>                       
+                                                        </div>
+                                                        <div class="d-flex w-100">
+                                                            <div class="registerElement d-flex elementMargin">
+                                                                <img src="${new URL('../img/component/login/profile.svg', import.meta.url)}">
+                                                                <select name="gender" style="background: none;color: black;" onchange="${gvc.event((e) => {
                                         widget.data.loginData.gender = e.value;
                                     })}">
-                                                                <option selected value="-1" hidden>性別</option>
-                                                                <option  value="1">男性</option>
-                                                                <option  value="0">女性</option>
-                                                            </select>                       
-                                                        </div>
-                                                        <div class="registerElement d-flex me-0 elementMargin ">
-                                                            <img src="${new URL('../img/component/login/calender.svg', import.meta.url)}">
-                                                            <input class="w-100" type="date" style="background: none;color: black;"  name="birth" onchange="${gvc.event((e) => {
+                                                                    <option selected value="-1" hidden>性別</option>
+                                                                    <option  value="1">男性</option>
+                                                                    <option  value="0">女性</option>
+                                                                </select>                       
+                                                            </div>
+                                                            <div class="registerElement d-flex me-0 elementMargin ">
+                                                                <img src="${new URL('../img/component/login/calender.svg', import.meta.url)}">
+                                                                <input class="w-100" type="date" style="background: none;color: black;"  name="birth" onchange="${gvc.event((e) => {
                                         widget.data.loginData.birthDay = e.value;
                                     })}" placeholder="出生日期" placeholder="MM/DD/YYYY"
-                                                            onclick="${gvc.event((e) => {
+                                                                onclick="${gvc.event((e) => {
                                         glitter.runJsInterFace("datePicker", {}, (response) => {
                                             glitter.$(e).val(response.data);
                                             widget.data.loginData.birthDay = response.data;
                                         });
                                     })}"   >
-                                                        </div>
-                                                    </div>     
-                                                    <div class="d-flex w-100">
-                                                        <div class="registerElement d-flex elementMargin w-100 me-0">                                                           
-                                                            <img src="${new URL('../img/component/login/TicketStar.svg', import.meta.url)}">
-                                                            <input class="w-100 me-0" placeholder="用戶邀請碼" name="inviteCode" onchange="${gvc.event((e) => {
+                                                            </div>
+                                                        </div>     
+                                                        <div class="d-flex w-100">
+                                                            <div class="registerElement d-flex elementMargin w-100 me-0">                                                           
+                                                                <img src="${new URL('../img/component/login/TicketStar.svg', import.meta.url)}">
+                                                                <input class="w-100 me-0" placeholder="用戶邀請碼" name="inviteCode" onchange="${gvc.event((e) => {
                                         widget.data.loginData.inviteCode = e.value;
                                     })}">                                                           
-                                                        </div>                       
-                                                    </div>  
-                                                                    
-                                                </div>                                                
+                                                            </div>                       
+                                                        </div>  
+                                                                        
+                                                    </div>                                                
                                                 <!--會員編號拿掉-->
                                                 <!--註冊-->
                                                 <!--todo click-->
@@ -962,10 +950,13 @@ Plugin.create(import.meta.url, (glitter) => {
                             view: () => {
                                 if (widget.data.topInset !== undefined) {
                                     return `
-                                    <main style="">                                       
-                                        <div class="w-100" style="position: absolute;">
-                                            <lottie-player src="${widget.data.background}"  background="#F8F3ED"  speed="1"  onclick="${gvc.event((e) => {
+                                    <main style="position: relative">  
+                                        <img src="https://homee-ai.github.io/glitter-htmlExtension/src/img/component/left-arrow.svg" alt="L" style="width: 28px;height: 28px;position: absolute;top:20px;left:16px;z-index: 3;" onclick="${gvc.event(() => {
                                         appConfig().setHome(gvc, "login");
+                                    })}">                                     
+                                        <div class="w-100" style="position: absolute;">
+                                            
+                                            <lottie-player src="${widget.data.background}"  background="#F8F3ED"  speed="1"  onclick="${gvc.event((e) => {
                                     })}" style="width: 100%;height: 1073px;position: absolute;transform: translateY(-40%);"  loop  autoplay></lottie-player>
                                         </div>
                                         <div class="loginBoard d-flex flex-column align-items-center">

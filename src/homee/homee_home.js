@@ -900,7 +900,7 @@ ${(() => {
 </select>
 ${(dd.type === 'image') ? `<div class="d-flex align-items-center mb-3 mt-1 ">
 <i class="fa-regular fa-circle-minus text-danger me-2" style="font-size: 20px;cursor: pointer;" onclick="${gvc.event(() => {
-                                        widget.data.right.splice(index, 1);
+                                        data.splice(index, 1);
                                         widget.refreshComponent();
                                     })}"></i>
 <input class="flex-fill form-control " placeholder="請輸入圖片連結" value="${(_b = dd.img) !== null && _b !== void 0 ? _b : ""}">

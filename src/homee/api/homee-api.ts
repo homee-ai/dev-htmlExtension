@@ -7,7 +7,10 @@ export class Api {
         const $ = (window as any).$;
         this.homeeAJAX = (data: { api?: string; route: string; method: string; data?: any }, callback?: (res: any) => void) => {
             const cont = data.api ? data.api : '/api/bm';
-
+            console.log("---------------")
+            console.log(data.route)
+            console.log(appConfig().token)
+            // /api/bm/collection
             if (data) {
                 $.ajax({
                     url: cont + data.route,
@@ -15,7 +18,9 @@ export class Api {
                     data: JSON.stringify(data.data),
                     contentType: 'application/json; charset=utf-8',
                     headers: { Authorization: appConfig().token },
-                    success: (suss: any) => callback && callback(suss),
+                    success: (suss: any) => {
+                        callback && callback(suss)
+                    },
                     error: (err: any) => {
                         switch (err.status) {
                             case 401:

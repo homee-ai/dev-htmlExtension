@@ -32,7 +32,6 @@ export function appConfig(): {
         uploadImage: (photoFile: any, callback: (result: string) => void) => {
             const glitter = (window as any).glitter
             const dialog=new Dialog()
-            console.log(photoFile)
             dialog.dataLoading(true)
             $.ajax({
                 url: Api.serverURL + '/api/v1/scene/getSignedUrl',

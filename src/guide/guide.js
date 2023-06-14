@@ -674,7 +674,7 @@ Plugin.create(import.meta.url, (glitter) => {
                     BTN: "開始掃描",
                     prevPage: "guide3",
                     nextPage: "",
-                    background: `${new URL(`video/homee 操作教學(步驟四).mp4`, import.meta.url)}`
+                    background: `https://homee-ai.github.io/glitter-htmlExtension/src/guide/video/homee%20%E6%93%8D%E4%BD%9C%E6%95%99%E5%AD%B8(%E6%AD%A5%E9%A9%9F%E5%9B%9B).mp4`
                 }
             },
             render: (gvc, widget, setting, hoverID) => {

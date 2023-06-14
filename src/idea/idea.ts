@@ -1783,11 +1783,9 @@ Plugin.create(import.meta.url,(glitter)=>{
                 const dialog=new Dialog(gvc)
                 //todo 是否不需要預設
                 let passData = gvc.parameter.pageConfig?.obj.data
-                console.log("passdata")
-                console.log(passData)
+
                 let imgArray: string[] = passData?.preview_image ?? ["https://oursbride.com/wp-content/uploads/2018/06/no-image.jpg" , "https://oursbride.com/wp-content/uploads/2018/06/no-image.jpg" , "https://oursbride.com/wp-content/uploads/2018/06/no-image.jpg"];
-                console.log("photo")
-                console.log(imgArray)
+
                 let userData:any;
                 let topInset: number = 0;
                 appConfig().getUserData({

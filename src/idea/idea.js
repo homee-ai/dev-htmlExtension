@@ -1595,11 +1595,7 @@ Plugin.create(import.meta.url, (glitter) => {
                 const shareView = new SharedView(gvc);
                 const dialog = new Dialog(gvc);
                 let passData = (_a = gvc.parameter.pageConfig) === null || _a === void 0 ? void 0 : _a.obj.data;
-                console.log("passdata");
-                console.log(passData);
                 let imgArray = (_b = passData === null || passData === void 0 ? void 0 : passData.preview_image) !== null && _b !== void 0 ? _b : ["https://oursbride.com/wp-content/uploads/2018/06/no-image.jpg", "https://oursbride.com/wp-content/uploads/2018/06/no-image.jpg", "https://oursbride.com/wp-content/uploads/2018/06/no-image.jpg"];
-                console.log("photo");
-                console.log(imgArray);
                 let userData;
                 let topInset = 0;
                 appConfig().getUserData({

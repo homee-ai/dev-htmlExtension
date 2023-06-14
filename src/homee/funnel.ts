@@ -9,7 +9,7 @@ interface osType {
     height?: number;
     setTime?: number;
     multi?: boolean;
-    searchData?:string
+    searchData?:string;
 }
 
 interface ajaxType {

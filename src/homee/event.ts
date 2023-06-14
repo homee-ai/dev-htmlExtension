@@ -359,7 +359,6 @@ ${
             return {
                 editor: () => {
                     const api = new Api()
-
                     function getInput(object: any) {
                         return gvc.bindView(() => {
                             const id = gvc.glitter.getUUID()
