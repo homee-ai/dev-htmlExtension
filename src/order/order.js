@@ -190,7 +190,6 @@ Plugin.create(import.meta.url, (glitter, editMode) => {
                 const data = widget.data;
                 Checkout.getOrderList({
                     callback: (response) => {
-                        alert(JSON.stringify(response));
                     }
                 });
                 return {

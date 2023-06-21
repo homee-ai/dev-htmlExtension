@@ -222,9 +222,7 @@ Plugin.create(import.meta.url, (glitter) => {
                                 widget.data.slideSelectBorderColor = e.value;
                                 widget.refreshAll();
                             })}">
-                            </div>
-<!--                                1px solid #FE5541-->
-                            
+                            </div>                            
                             `,
                             gvc.bindView({
                                 bind: editorID,

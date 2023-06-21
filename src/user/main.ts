@@ -137,6 +137,7 @@ Plugin.create(import.meta.url, (glitter) => {
 
             },
             render: (gvc, widget, setting, hoverID) => {
+                widget.data.background = widget.data.background ?? "#FBF9F6"
                 return {
                     view: () => {
                         gvc.addStyle(`
@@ -179,7 +180,7 @@ Plugin.create(import.meta.url, (glitter) => {
                             }   
                         `)
                         return `
-                        <div class="d-flex align-items-center  w-100 serviceRow" onclick="${gvc.event(() => {
+                        <div class="d-flex align-items-center  w-100 serviceRow" style="background: ${widget.data.background}" onclick="${gvc.event(() => {
                             ClickEvent.trigger({
                                 gvc, widget, clickEvent: widget.data
                             })
@@ -197,6 +198,16 @@ Plugin.create(import.meta.url, (glitter) => {
                     },
                     editor: () => {
                         return gvc.map([
+                            glitter.htmlGenerate.editeInput({
+                                gvc:gvc,
+                                title:'背景顏色色碼',
+                                default:widget.data.background||"#FBF9F6",
+                                placeHolder:'請輸入背景顏色的色碼',
+                                callback:(text)=>{
+                                    widget.data.background =text
+                                    widget.refreshComponent()
+                                }
+                            }),
                             glitter.htmlGenerate.editeInput({
                                 gvc: gvc,
                                 title: "左方文字",
@@ -253,6 +264,7 @@ Plugin.create(import.meta.url, (glitter) => {
             },
             render: (gvc, widget, setting, hoverID) => {
                 widget.data.model = widget.data.model ?? []
+                widget.data.background = widget.data.background ?? "#FBF9F6"
                 return {
                     view: () => {
                         gvc.addStyle(`
@@ -320,13 +332,170 @@ color: #1E1E1E;
                                 }))
                             }, divCreate: {
                                 class: `d-flex justify-content-between `,
-                                style: `padding: 28px 20px;border-radius: 20px; gap: 8px; margin-top: 16px;margin-bottom: 12px;background : #FBF9F6;`
+                                style: `padding: 28px 20px;border-radius: 20px; gap: 8px; margin-top: 16px;margin-bottom: 12px;background : ${widget.data.background};`
                             }
                         })
 
                     },
                     editor: () => {
-                        return gvc.map(widget.data.model.map((dd:any,index:number)=>{
+                        return glitter.htmlGenerate.editeInput({
+                            gvc:gvc,
+                            title:'背景顏色色碼',
+                            default:widget.data.background||"#FBF9F6",
+                            placeHolder:'請輸入背景顏色的色碼',
+                            callback:(text)=>{
+                                widget.data.background =text
+                                widget.refreshComponent()
+                            }
+                        }) + gvc.map(widget.data.model.map((dd:any,index:number)=>{
+                            return `<div class="alert alert-dark">
+<h3 class="text-white" style="font-size: 16px;">項目.${index+1}</h3>
+${glitter.htmlGenerate.editeInput({
+                                gvc:gvc,
+                                title:'標題',
+                                default:dd.title,
+                                placeHolder:'請輸入標題',
+                                callback:(text)=>{
+                                    dd.title=text
+                                    widget.refreshComponent()
+                                }
+                            })}
+${
+                                `<div class="d-flex align-items-center  mt-3">
+<i class="fa-regular fa-circle-minus text-danger me-2" style="font-size: 20px;cursor: pointer;" onclick="${gvc.event(() => {
+                                    widget.data.left.splice(index, 1)
+                                    widget.refreshComponent()
+                                })}"></i>
+<input class="flex-fill form-control " placeholder="請輸入圖片連結" value="${dd.icon}">
+
+<div class="" style="width: 1px;height: 25px;background-color: white;"></div>
+<i class="fa-regular fa-upload text-white ms-2" style="cursor: pointer;" onclick="${gvc.event(() => {
+                                    glitter.ut.chooseMediaCallback({
+                                        single: true,
+                                        accept: 'image/*',
+                                        callback(data: { file: any; data: any; type: string; name: string; extension: string }[]) {
+                                            appConfig().uploadImage(data[0].file, (link) => {
+                                                dd.icon = link;
+                                                widget.refreshComponent()
+                                            })
+                                        }
+                                    })
+                                })}"></i>
+</div>`
+                            }
+${ClickEvent.editer(gvc,widget,dd)}
+</div>`
+                        }))
+                    }
+                }
+            },
+        },
+        funTwoPuzzle: {
+            defaultData: {
+                model: [
+                    {
+                        title: "我的空間",
+                        icon: "https://prd-homee-api-public.s3.amazonaws.com/file/guest/1687325397951-newSpace.svg",
+                        count: 0,
+                        click: () => {
+
+                        }
+                    },
+                    {
+                        title: "回饋優惠",
+                        icon: "https://stg-homee-api-public.s3.amazonaws.com/scene/undefined/1676977138152.png",
+                        count: 0,
+                        click: () => {
+
+                        }
+                    }]
+            },
+            render: (gvc, widget, setting, hoverID) => {
+                widget.data.model = widget.data.model ?? []
+                widget.data.background = widget.data.background ?? "#FFFFFF"
+                return {
+                    view: () => {
+                        gvc.addStyle(`
+                     .mySpaceCount{
+                        width: 16px;
+                        height: 16px;
+            
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        font-family: 'Noto Sans TC';
+                        font-style: normal;
+                        font-weight: 700;
+                        font-size: 10px;
+                        line-height: 15px;
+                        text-align: center;
+                        background: #FD6A58;
+                        /* HOMEE white */
+            
+                        border: 1px solid #FFFFFF;
+                        border-radius: 8px;
+                        /* HOMEE white */
+            
+                        color: #FFFFFF;
+            
+                    }
+                    `)
+                        return gvc.bindView({
+                            bind: "funPuzzle",
+                            view: () => {
+                                return gvc.map(widget.data.model.map((item: any, index: number) => {
+                                    let length = widget.data.model.length;
+                                    let width = (100 / length);
+                                    let style = (index != length - 1) ? "border-right:2px solid #F8F3ED" : "";
+
+                                    return `
+                                    <div class="d-flex align-items-center justify-content-center" style="width: ${width}%;height: 56px; ${style}" onclick="${gvc.event(() => {
+                                        ClickEvent.trigger({gvc,widget,clickEvent:item
+                                        })
+                                    })}">
+                                        <div style="position: relative;width: 30px;height: 30px;margin-right: 16px;">
+                                            ${(() => {
+                                        if (item.count != 0) {
+                                            return `<div class="mySpaceCount" style="position: absolute;right:-4px;top:-4px;z-index: 5;">${item.count}</div>`
+                                        } else {
+                                            return ``
+                                        }
+                                    })()}
+                                            <img class="h-100 w-100" src="${item.icon}" style="">
+                                        </div>
+                                        <div class="indexTitle" style="margin-top: 5px;font-family: 'Noto Sans TC';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 23px;
+color: #1E1E1E;
+">
+                                            ${item.title}
+                                        </div>
+                                        
+                                    </div>
+                   
+                            `
+                                }))
+                            }, divCreate: {
+                                class: `d-flex justify-content-between `,
+                                style: `padding: 28px 20px;border-radius: 20px; gap: 8px; margin-top: 16px;margin-bottom: 12px;background : ${widget.data.background };`
+                            }
+                        })
+
+                    },
+                    editor: () => {
+                        return glitter.htmlGenerate.editeInput({
+                            gvc:gvc,
+                            title:'背景顏色色碼',
+                            default:widget.data.background||"#FBF9F6",
+                            placeHolder:'請輸入背景顏色的色碼',
+                            callback:(text)=>{
+                                widget.data.background =text
+                                widget.refreshComponent()
+                            }
+                        }) + gvc.map(widget.data.model.map((dd:any,index:number)=>{
                             return `<div class="alert alert-dark">
 <h3 class="text-white" style="font-size: 16px;">項目.${index+1}</h3>
 ${glitter.htmlGenerate.editeInput({

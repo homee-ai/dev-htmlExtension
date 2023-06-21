@@ -192,7 +192,7 @@ Plugin.create(import.meta.url, (glitter, editMode) => {
                 const data: { link: { img: string, code?: string }[] } = widget.data
                 Checkout.getOrderList({
                     callback: (response) => {
-                        alert(JSON.stringify(response))
+
                     }
                 })
                 return {
